@@ -12,11 +12,14 @@ import os
 
 import joblib
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from preprocessing import limpiar_texto
 
 MODEL_DIR = os.getenv("MODEL_DIR", "models")
+STATIC_DIR = os.getenv("STATIC_DIR", "static")
 
 app = FastAPI(
     title="Fake News Classifier API",
@@ -56,6 +59,15 @@ def cargar_modelo():
 @app.get("/health")
 def health():
     return {"status": "ok", "model_loaded": model is not None}
+
+
+@app.get("/")
+def index():
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+
+
+# Sirve cualquier otro asset estático (css/js/imagenes) que agregues luego en static/
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.post("/predict", response_model=PredictResponse)
