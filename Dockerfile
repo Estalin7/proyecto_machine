@@ -11,7 +11,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src
-COPY models/ ./models
+# Descargar modelos usando gdown
+RUN pip install gdown
+RUN mkdir -p models && \
+    gdown --id 1bpIh1EEW-UWZxGOwW1dLqtHOCR4EF3m8 -O models/model.pkl && \
+    gdown --id 1ytHdWOk9vsntO4iENayroXhWrMVCpN_- -O models/vectorizer.pkl
+
 COPY static/ ./static
 
 ENV MODEL_DIR=/app/models
