@@ -14,8 +14,8 @@ COPY src/ ./src
 # Descargar modelos usando gdown
 RUN pip install gdown
 RUN mkdir -p models && \
-    gdown --fuzzy "https://drive.google.com/file/d/1bpIh1EEW-UWZxGOwW1dLqtHOCR4EF3m8/view?usp=sharing" -O models/model.pkl && \
-    gdown --fuzzy "https://drive.google.com/file/d/1ytHdWOk9vsntO4iENayroXhWrMVCpN_-/view?usp=sharing" -O models/vectorizer.pkl
+    gdown "https://drive.google.com/file/d/1bpIh1EEW-UWZxGOwW1dLqtHOCR4EF3m8/view?usp=sharing" -O models/model.pkl && \
+    gdown "https://drive.google.com/file/d/1ytHdWOk9vsntO4iENayroXhWrMVCpN_-/view?usp=sharing" -O models/vectorizer.pkl
 
 COPY static/ ./static
 
