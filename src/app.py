@@ -81,8 +81,9 @@ def predict(payload: PredictRequest):
     texto_limpio = limpiar_texto(payload.title)
     X = vectorizer.transform([texto_limpio])
 
-    pred = model.predict(X)[0]
-    proba = model.predict_proba(X)[0][pred]
+    pred = int(model.predict(X)[0])
+    proba_array = model.predict_proba(X)[0]
+    proba = float(proba_array[pred])
 
     label = "real" if pred == 1 else "fake"
-    return PredictResponse(label=label, probability=round(float(proba), 4))
+    return PredictResponse(label=label, probability=round(proba, 4))
