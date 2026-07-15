@@ -2,3 +2,8 @@
 gossipcop_fake.csv
 gossipcop_real.csv
 *.pkl
+.venv/
+_pycache__/
+src/__pycache__/
+**/__pycache__/
+.vscode/
