@@ -191,7 +191,11 @@
         const verification = data.url_verification;
         const label = verification.risk_label || 'desconocido';
         const detail = verification.message ? ` · ${verification.message}` : '';
-        reportHtml += `<div class="title" style="margin-top:8px;">Verificación del enlace</div>Estado: <strong>${label.toUpperCase()}</strong>${detail}`;
+        const stats = verification.stats || {};
+        const malicious = stats.malicious || 0;
+        const suspicious = stats.suspicious || 0;
+        const summary = `Maliciosas: <strong>${malicious}</strong> · Sospechosas: <strong>${suspicious}</strong>`;
+        reportHtml += `<div class="title" style="margin-top:8px;">Verificación del enlace</div>Estado: <strong>${label.toUpperCase()}</strong>${detail}<br><span style="display:block; margin-top:6px;">Detecciones realizadas</span>${summary}`;
       }
       if (reportHtml) {
         reportBox.innerHTML = reportHtml;

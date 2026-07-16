@@ -127,7 +127,7 @@ def evaluar_reporte_virustotal(stats: dict[str, Any]) -> dict[str, Any]:
     if total == 0:
         return {
             "status": "unknown",
-            "risk_label": "desconocido",
+            "risk_label": "seguro",
             "is_dangerous": False,
             "stats": stats,
         }
